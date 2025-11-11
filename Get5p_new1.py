@@ -113,6 +113,9 @@ if data.get("result") and data["result"].get("data"):
             print(f"保存数据到 CSV 文件时发生错误: {e}")
     else:
         print(f"数据已存在，无需追加: 期号={issue_no}, 日期={open_date}, 开奖号码={','.join(open_results)}")
+        # 即使数据已存在，也需要确保 df_updated_sorted 被定义
+        df_existing['期号'] = df_existing['期号'].astype(str)
+        df_updated_sorted = df_existing.sort_values(by='期号', ascending=False).reset_index(drop=True)
 
     # 获取上一期和上上期数据
     df_existing_sorted = df_updated_sorted.sort_values(by='期号', ascending=False).reset_index(drop=True)
@@ -138,10 +141,10 @@ print(f"上上期:{second_last_issue['开奖号码']}")
 if __name__ == "__main__":
     try:
         today_date = now.strftime('%Y-%m-%d')
-        url = "http://wx.msg.13982.com/send_template"
+        url = "http://wx.msg.13982.com/send"
         headers = {
             "Content-Type": "application/json",
-            "x-api-key": "sw63828"
+            "X-API-Key": "sw63828"
         }
         to_users = [
             "oXUv66MibUi7VInLBf7AHqMIY438",

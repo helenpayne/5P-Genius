@@ -110,10 +110,10 @@ if __name__ == "__main__":
     try:
         results = analyze_and_predict_lottery_data(file_path)
         today_date = now.strftime('%Y-%m-%d')
-        url = "http://wx.msg.13982.com/send_template"
+        url = "http://wx.msg.13982.com/send"
         headers = {
             "Content-Type": "application/json",
-            "x-api-key": "sw63828"
+            "X-API-Key": "sw63828"
         }
         to_users = [
             "oXUv66MibUi7VInLBf7AHqMIY438",
